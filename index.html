@@ -1,126 +1,255 @@
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Resultados de Hoy</title>
+  <meta name="description" content="Resultados de hoy - consulta los últimos resultados de las loterías de Colombia." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-      color: #333;
+    :root{
+      --bg:#f4f6f8;
+      --card:#ffffff;
+      --accent:#2e8b57; /* verde agradable */
+      --muted:#6b7280;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 6px 18px rgba(13,38,25,0.06);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
     }
-    header {
-      background-color: #2e7d32; /* Verde */
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-    .intro {
-      text-align: center;
-      margin: 20px;
-      font-size: 1.1em;
-    }
-    .search-box {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .search-box input {
-      padding: 8px;
-      width: 80%;
-      max-width: 400px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    table {
-      width: 95%;
-      margin: 10px auto;
-      border-collapse: collapse; /* Filas pegadas */
-      background: #fff;
-      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-    }
-    th {
-      background-color: #2e7d32; /* Verde */
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-    td {
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #ddd;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-    tr:hover {
-      background-color: #e8f5e9;
-    }
-    .section-title {
-      background-color: #424242; /* Fondo gris oscuro para títulos de sección */
-      color: white;
-      padding: 8px;
-      text-align: center;
-      font-size: 1.2em;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220;line-height:1.4}
+    header{background:linear-gradient(90deg,var(--accent), #1f7a4f);color:#fff;padding:18px 20px}
+    .container{max-width:1100px;margin:20px auto;padding:0 16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:52px;height:52px;background:#fff;border-radius:10px;display:grid;place-items:center;color:var(--accent);font-weight:700;font-size:18px}
+    h1{margin:0;font-size:22px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+
+    /* main layout */
+    main{display:grid;grid-template-columns: 1fr 340px;gap:20px;margin-top:18px}
+
+    /* left */
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
+    .latest{display:flex;gap:14px;align-items:center}
+    .lottery-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px}
+    .lottery{padding:12px;border-radius:10px;background:linear-gradient(180deg,var(--glass),#fff);border:1px solid rgba(0,0,0,0.03)}
+    .lottery h3{margin:0;font-size:15px}
+    .lottery .number{font-size:18px;font-weight:700;color:var(--accent);margin-top:6px}
+
+    /* results table */
+    .controls{display:flex;gap:8px;align-items:center}
+    input[type=search]{padding:10px 12px;border-radius:10px;border:1px solid #e6e9ef;width:100%}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #eef2f6}
+    tr:last-child td{border-bottom: none}
+    .muted{color:var(--muted);font-size:13px}
+    .badge{display:inline-block;padding:6px 8px;border-radius:999px;background:#eefdf3;color:var(--accent);font-weight:600}
+
+    /* right sidebar */
+    aside .card + .card{margin-top:12px}
+    .small-list{display:flex;flex-direction:column;gap:8px}
+    .small-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:#fbfdfb;border:1px solid rgba(0,0,0,0.03)}
+
+    /* footer */
+    footer{margin-top:26px;padding:20px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){main{grid-template-columns:1fr}aside{order:2}.sidebar-mobile{display:block}}
   </style>
 </head>
 <body>
   <header>
-    <h1>Resultados de Hoy</h1>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">RDH</div>
+        <div>
+          <h1>Resultados de Hoy</h1>
+          <div class="muted">Últimos resultados de las principales loterías - actualizado automáticamente</div>
+        </div>
+      </div>
+      <div class="topbar">
+        <div class="muted">Hoy, <span id="today">--</span></div>
+        <div class="muted">Contacto: <strong>tu-email@ejemplo.com</strong></div>
+      </div>
+    </div>
   </header>
-  <div class="intro">
-    Consulta aquí los resultados actualizados de las principales loterías de Colombia,<br>
-    chances y otros juegos de azar.
-  </div>
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Buscar lotería o chance..." onkeyup="searchTable()">
-  </div>
 
-  <div class="section-title">Loterías</div>
-  <table id="lotteries">
-    <tr><th>Lotería</th><th>Resultado</th><th>Serie</th><th>Fecha</th></tr>
-    <tr data-key="cundinamarca"><td>Lotería de Cundinamarca</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="cruz_roja"><td>Lotería de la Cruz Roja</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="valle"><td>Lotería del Valle</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="bogota"><td>Lotería de Bogotá</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="quindio"><td>Lotería del Quindío</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="santander"><td>Lotería de Santander</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="medellin"><td>Lotería de Medellín</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="boyaca"><td>Lotería de Boyacá</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="cauca"><td>Lotería del Cauca</td><td>----</td><td>----</td><td>----</td></tr>
-  </table>
+  <div class="container">
+    <main>
+      <section>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2 style="margin:0;font-size:18px">Resultados recientes</h2>
+              <div class="muted">Selecciona una lotería para ver sus últimos resultados</div>
+            </div>
+            <div class="controls" style="width:320px">
+              <input id="search" type="search" placeholder="Buscar lotería, ejemplo: Sinuano" />
+              <select id="filter">
+                <option value="all">Todas</option>
+                <option value="noche">Noche</option>
+                <option value="dia">Día</option>
+              </select>
+            </div>
+          </div>
 
-  <div class="section-title">Chances y otros juegos</div>
-  <table id="chances">
-    <tr><th>Juego</th><th>Resultado</th><th>Serie</th><th>Fecha</th></tr>
-    <tr data-key="sinuano_dia"><td>Sinuano Día</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="sinuano_noche"><td>Sinuano Noche</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="caribena_dia"><td>Caribeña Día</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="caribena_noche"><td>Caribeña Noche</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="astro_sol"><td>Astro Sol</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="astro_luna"><td>Astro Luna</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="culona_dia"><td>Culona Día</td><td>----</td><td>----</td><td>----</td></tr>
-    <tr data-key="culona_noche"><td>Culona Noche</td><td>----</td><td>----</td><td>----</td></tr>
-  </table>
+          <div class="lottery-list" id="lotteryList">
+            <!-- tarjetas de loterías (generadas por JS) -->
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0">Historial de resultados</h3>
+          <div class="muted">Últimos sorteos</div>
+
+          <table id="resultsTable" aria-live="polite">
+            <thead>
+              <tr><th>Lotería</th><th>Fecha</th><th>Resultado</th><th>Tipo</th></tr>
+            </thead>
+            <tbody>
+              <!-- filas generadas por JS -->
+            </tbody>
+          </table>
+
+          <div style="margin-top:12px;display:flex;justify-content:center">
+            <button id="loadMore" style="padding:10px 14px;border-radius:10px;border:1px solid #e6e9ef;background:#fff;">Cargar más</button>
+          </div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h4 style="margin:0 0 8px 0">Último sorteo destacado</h4>
+          <div class="latest">
+            <div>
+              <div class="muted">Sorteo</div>
+              <div style="font-size:18px;font-weight:700">Sinuano - Noche</div>
+              <div class="number">12345</div>
+            </div>
+            <div style="margin-left:auto;text-align:right">
+              <div class="muted">Fecha</div>
+              <div>05/10/2025</div>
+              <div style="margin-top:8px"><span class="badge">Ganador</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px 0">Loterías populares</h4>
+          <div class="small-list" id="popularList">
+            <!-- items generados por JS -->
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px 0">Suscríbete</h4>
+          <p class="muted">Recibe resultados por correo o Telegram (próximamente).</p>
+          <input placeholder="tu@email.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef" />
+          <button style="margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--accent);color:#fff;border:none">Suscribirme</button>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Resultados de Hoy — Sitio de ejemplo. Si quieres que conecte esto a una fuente real de resultados, puedo mostrarte cómo.
+    </footer>
+  </div>
 
   <script>
-    function searchTable() {
-      const input = document.getElementById("search").value.toLowerCase();
-      const rows = document.querySelectorAll("table tr[data-key]");
-      rows.forEach(row => {
-        row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
-      });
+    // Datos de ejemplo -- reemplaza con fetch a tu API cuando quieras
+    const sampleLotteries = [
+      {id:1,name:'Sinuano',type:'noche',latest:'12345',date:'2025-10-05'},
+      {id:2,name:'Baloto',type:'dia',latest:'07 - 14 - 23 - 35 - 42',date:'2025-10-05'},
+      {id:3,name:'Chance',type:'noche',latest:'98765',date:'2025-10-05'},
+      {id:4,name:'Lotería de Bogotá',type:'dia',latest:'11 - 19 - 27 - 33 - 40',date:'2025-10-04'}
+    ];
+
+    const sampleHistory = [
+      {lottery:'Sinuano',date:'2025-10-05',result:'12345',type:'Noche'},
+      {lottery:'Baloto',date:'2025-10-05',result:'07 - 14 - 23 - 35 - 42',type:'Día'},
+      {lottery:'Chance',date:'2025-10-04',result:'98765',type:'Noche'},
+      {lottery:'Lotería de Bogotá',date:'2025-10-04',result:'11 - 19 - 27 - 33 - 40',type:'Día'}
+    ];
+
+    const lotteryListEl = document.getElementById('lotteryList');
+    const resultsTableBody = document.querySelector('#resultsTable tbody');
+    const popularListEl = document.getElementById('popularList');
+    const todayEl = document.getElementById('today');
+    const yearEl = document.getElementById('year');
+
+    function renderLotteries(list){
+      lotteryListEl.innerHTML = '';
+      list.forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'lottery';
+        div.innerHTML = `
+          <h3>${l.name}</h3>
+          <div class="muted">Último: <span class="number">${l.latest}</span></div>
+          <div class="muted">${l.date} · ${l.type}</div>
+        `;
+        div.addEventListener('click', ()=> showOnly(l.id));
+        lotteryListEl.appendChild(div);
+      })
     }
+
+    function renderHistory(history){
+      resultsTableBody.innerHTML = '';
+      history.forEach(h =>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${h.lottery}</td><td class="muted">${h.date}</td><td><strong>${h.result}</strong></td><td class="muted">${h.type}</td>`;
+        resultsTableBody.appendChild(tr);
+      })
+    }
+
+    function renderPopular(list){
+      popularListEl.innerHTML = '';
+      list.slice(0,5).forEach(l=>{
+        const div = document.createElement('div');
+        div.className='small-item';
+        div.innerHTML = `<div>${l.name}</div><div class="muted">${l.latest}</div>`;
+        popularListEl.appendChild(div);
+      })
+    }
+
+    function showOnly(id){
+      const selected = sampleLotteries.find(x=>x.id===id);
+      if(!selected) return;
+      // filtrar historial por la lotería (ejemplo)
+      const filtered = sampleHistory.filter(h=>h.lottery === selected.name);
+      renderHistory(filtered.length?filtered: [{lottery:selected.name,date:selected.date,result:selected.latest,type:selected.type}] );
+    }
+
+    // inicial
+    renderLotteries(sampleLotteries);
+    renderHistory(sampleHistory);
+    renderPopular(sampleLotteries);
+
+    // footer year y fecha
+    const d = new Date();
+    todayEl.textContent = d.toLocaleDateString('es-CO', {year:'numeric',month:'2-digit',day:'2-digit'});
+    yearEl.textContent = d.getFullYear();
+
+    // búsqueda y filtro (funcionalidad simple)
+    document.getElementById('search').addEventListener('input',(e)=>{
+      const q = e.target.value.toLowerCase();
+      const filtered = sampleLotteries.filter(l=> l.name.toLowerCase().includes(q));
+      renderLotteries(filtered.length?filtered: sampleLotteries);
+    });
+
+    document.getElementById('filter').addEventListener('change',(e)=>{
+      const v = e.target.value;
+      const filtered = v==='all'? sampleLotteries : sampleLotteries.filter(l=> l.type===v);
+      renderLotteries(filtered);
+    })
+
+    // botón cargar más (simula agregar resultados históricos)
+    document.getElementById('loadMore').addEventListener('click', ()=>{
+      sampleHistory.push({lottery:'Sinuano',date:'2025-10-03',result:'54321',type:'Noche'});
+      renderHistory(sampleHistory);
+    })
+
+    // NOTA: Para conectar a datos reales use `fetch('URL_API')` y reemplace los arreglos sampleLotteries y sampleHistory.
+    // Si quieres, te doy el código de ejemplo para consumir una API pública o para scrappear (si la fuente lo permite).
   </script>
 </body>
 </html>
-```
 
