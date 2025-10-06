@@ -1,106 +1,134 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Resultados Loterías de Colombia</title>
+  <title>Resultados de Hoy</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f9;
-      color: #333;
-      text-align: center;
+      background-color: #f4f6f9;
       margin: 0;
       padding: 0;
+      text-align: center;
     }
+
     header {
-      background: #0057b8;
+      background-color: #2c3e50;
       color: white;
-      padding: 15px 0;
+      padding: 20px 0;
     }
-    h1 {
+
+    header h1 {
       margin: 0;
+      font-size: 2.5em;
     }
+
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #34495e;
+      margin-top: 30px;
+    }
+
     table {
-      width: 95%;
+      width: 90%;
+      max-width: 800px;
       margin: 20px auto;
       border-collapse: collapse;
       background: white;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+
     th, td {
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ddd;
-      font-size: 14px;
+      text-align: center;
     }
+
     th {
-      background: #0057b8;
+      background-color: #2980b9;
       color: white;
     }
+
     tr:nth-child(even) {
-      background: #f2f2f2;
+      background-color: #f2f2f2;
     }
+
     footer {
-      margin-top: 30px;
-      padding: 15px;
-      background: #0057b8;
+      background-color: #2c3e50;
       color: white;
-      font-size: 14px;
+      padding: 10px 0;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Resultados de Loterías y Chances en Colombia</h1>
-    <p>Aquí podrás consultar los resultados actualizados de todas las loterías y chances diarios.</p>
+    <h1>Resultados de Hoy</h1>
+    <p>Todas las loterías y chances de Colombia en un solo lugar</p>
   </header>
 
-  <table>
-    <tr>
-      <th>Lotería / Chance</th>
-      <th>Último Resultado</th>
-      <th>Fecha</th>
-    </tr>
-    <!-- Loterías principales -->
-    <tr><td>Lotería de Cundinamarca</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Boyacá</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de la Cruz Roja</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería del Huila</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería del Tolima</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería del Meta</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Santander</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Risaralda</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería del Cauca</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Manizales</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Medellín</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería de Bogotá</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Lotería del Valle</td><td>---- (por actualizar)</td><td>----</td></tr>
+  <main>
+    <h2>Loterías</h2>
+    <table>
+      <tr>
+        <th>Lotería</th>
+        <th>Resultado</th>
+        <th>Fecha</th>
+      </tr>
+      <tr>
+        <td>Lotería de Cundinamarca</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+      <tr>
+        <td>Lotería Cruz Roja</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+      <tr>
+        <td>Lotería del Tolima</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+    </table>
 
-    <!-- Chances / regionales -->
-    <tr><td>Sinuano Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Sinuano Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Caribeña Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Caribeña Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Motilón Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Motilón Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Paisita Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Paisita Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Cafeterito Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Cafeterito Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Chontico Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Chontico Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Dorado Mañana</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Dorado Tarde</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Fantástica Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Fantástica Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Culona Día</td><td>---- (por actualizar)</td><td>----</td></tr>
-    <tr><td>Culona Noche</td><td>---- (por actualizar)</td><td>----</td></tr>
-  </table>
+    <h2>Chances</h2>
+    <table>
+      <tr>
+        <th>Chance</th>
+        <th>Resultado</th>
+        <th>Fecha</th>
+      </tr>
+      <tr>
+        <td>Sinuano Día</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+      <tr>
+        <td>Sinuano Noche</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+      <tr>
+        <td>Caribeña Día</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+      <tr>
+        <td>Caribeña Noche</td>
+        <td>0000</td>
+        <td>05/10/2025</td>
+      </tr>
+    </table>
+  </main>
 
   <footer>
-    <p>© 2025 Resultados Loterías de Colombia</p>
+    <p>&copy; 2025 Resultados de Hoy | Todos los derechos reservados</p>
   </footer>
 </body>
 </html>
-```
+
 
