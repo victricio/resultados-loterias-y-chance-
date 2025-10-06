@@ -1,66 +1,105 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Resultados de Hoy</title>
+  <meta name="description" content="Resultados de loterías y chances de Colombia - actualizados" />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+    :root{
+      --primary:#2980b9;
+      --dark:#2c3e50;
+      --bg:#f4f6f9;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{
+      background:var(--dark);
+      color:white;
+      padding:20px;
+      text-align:center;
+    }
+    header h1{ margin:0; font-size:2rem; }
+    header p{ margin:6px 0 0; opacity:.9; }
+
+    main{ padding:18px; max-width:1200px; margin:0 auto; }
+
+    .controls{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .controls input[type="search"]{
+      padding:10px 12px;
+      width:320px;
+      max-width:90%;
+      border-radius:6px;
+      border:1px solid #ccc;
+      outline:none;
+    }
+    .section-title{
+      color:var(--dark);
+      margin:18px 6px 8px;
+      text-align:left;
+      font-size:1.15rem;
     }
 
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 20px 0;
+    .table-wrap{
+      overflow-x:auto;
+      background:transparent;
+      margin-bottom:20px;
+      border-radius:8px;
+      padding:6px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
+    table{
+      width:100%;
+      min-width:820px;
+      border-collapse:collapse;
+      background:var(--card);
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+      border-radius:6px;
+      overflow:hidden;
+    }
+    th,td{
+      padding:10px 12px;
+      border-bottom:1px solid #eee;
+      text-align:center;
+      font-size:14px;
+    }
+    th{
+      background:var(--primary);
+      color:white;
+      position:sticky;
+      top:0;
+    }
+    tr:nth-child(even) td{ background:#fbfbfc; }
+    td.name { text-align:left; padding-left:18px; font-weight:600; }
+
+    footer{
+      background:var(--dark);
+      color:white;
+      text-align:center;
+      padding:12px 10px;
+      margin-top:24px;
     }
 
-    main {
-      padding: 20px;
-    }
-
-    h2 {
-      color: #34495e;
-      margin-top: 30px;
-    }
-
-    table {
-      width: 95%;
-      max-width: 1000px;
-      margin: 20px auto;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-
-    th {
-      background-color: #2980b9;
-      color: white;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-
-    footer {
-      background-color: #2c3e50;
-      color: white;
-      padding: 10px 0;
-      margin-top: 40px;
+    @media(max-width:640px){
+      header h1{ font-size:1.4rem; }
+      th,td{ padding:8px; font-size:13px; }
+      .controls input[type="search"]{ width:100%; }
     }
   </style>
 </head>
@@ -71,53 +110,144 @@
   </header>
 
   <main>
-    <h2>Loterías</h2>
-    <table>
-      <tr>
-        <th>Lotería</th>
-        <th>Resultado</th>
-        <th>Fecha</th>
-      </tr>
-      <tr><td>Lotería de Boyacá</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de Medellín</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de Cundinamarca</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de Santander</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Valle</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Cauca</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Tolima</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de Risaralda</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de la Cruz Roja</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Meta</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Huila</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería del Quindío</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Lotería de Manizales (Caldas)</td><td>0000</td><td>05/10/2025</td></tr>
-    </table>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Buscar lotería o chance (ej: Sinuano, Cundinamarca, Caribeña)"/>
+    </div>
 
-    <h2>Chances</h2>
-    <table>
-      <tr>
-        <th>Chance</th>
-        <th>Resultado</th>
-        <th>Fecha</th>
-      </tr>
-      <tr><td>Sinuano Día</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Sinuano Noche</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Caribeña Día</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Caribeña Noche</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Motilón Tarde</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Motilón Noche</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Cafeterito Tarde</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Cafeterito Noche</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Chontico Día</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Chontico Noche</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Paisa Día</td><td>0000</td><td>05/10/2025</td></tr>
-      <tr><td>Paisa Noche</td><td>0000</td><td>05/10/2025</td></tr>
-    </table>
+    <!-- LOTERÍAS -->
+    <div>
+      <div class="section-title">Loterías</div>
+      <div class="table-wrap">
+        <table id="loterias-table" aria-label="Tabla de loterías">
+          <thead>
+            <tr>
+              <th>Lotería</th>
+              <th>Resultado</th>
+              <th>Serie / Observación</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Cada fila tiene data-key que se usará luego para actualizar desde Firebase / API -->
+            <tr data-key="bogota"><td class="name">Lotería de Bogotá</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="medellin"><td class="name">Lotería de Medellín (Antioquia)</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cundinamarca"><td class="name">Lotería de Cundinamarca</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="boyaca"><td class="name">Lotería de Boyacá</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cruz_roja"><td class="name">Lotería de la Cruz Roja</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="tolima"><td class="name">Lotería del Tolima</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="meta"><td class="name">Lotería del Meta</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="valle"><td class="name">Lotería del Valle</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cauca"><td class="name">Lotería del Cauca</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="risaralda"><td class="name">Lotería de Risaralda</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="manizales"><td class="name">Lotería de Manizales (Caldas)</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="huila"><td class="name">Lotería del Huila</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="quindio"><td class="name">Lotería del Quindío</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="atlántico"><td class="name">Lotería del Atlántico</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="bolivar"><td class="name">Lotería de Bolívar</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="santander"><td class="name">Lotería de Santander</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="norte_santander"><td class="name">Lotería Norte de Santander</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cesar"><td class="name">Lotería del Cesar</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cordoba"><td class="name">Lotería de Córdoba</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="magdalena"><td class="name">Lotería del Magdalena</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="nariño"><td class="name">Lotería de Nariño</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <!-- Puedes agregar más filas si hace falta -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CHANCES / REGIONALES -->
+    <div>
+      <div class="section-title">Chances y juegos diarios</div>
+      <div class="table-wrap">
+        <table id="chances-table" aria-label="Tabla de chances">
+          <thead>
+            <tr>
+              <th>Chance / Juego</th>
+              <th>Resultado</th>
+              <th>Hora / Observación</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-key="sinuano_dia"><td class="name">Sinuano Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="sinuano_noche"><td class="name">Sinuano Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="caribena_dia"><td class="name">Caribeña Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="caribena_noche"><td class="name">Caribeña Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="paisita_dia"><td class="name">Paisita Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="paisita_noche"><td class="name">Paisita Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="motilon_dia"><td class="name">Motilón Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="motilon_noche"><td class="name">Motilón Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cafeterito_dia"><td class="name">Cafeterito Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="cafeterito_noche"><td class="name">Cafeterito Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="chontico_dia"><td class="name">Chontico Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="chontico_noche"><td class="name">Chontico Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="astro_sol"><td class="name">Astro Sol</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+           <tr data-key="astro_luna"><td class="name">Astro Luna</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr
+            <tr data-key="dorado_manana"><td class="name">Dorado Mañana</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="dorado_tarde"><td class="name">Dorado Tarde</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="fantastica_dia"><td class="name">Fantástica Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="fantastica_noche"><td class="name">Fantástica Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="culona_dia"><td class="name">Culona Día</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="culona_noche"><td class="name">Culona Noche</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+            <tr data-key="otros"><td class="name">Otros / Especiales</td><td data-col="result">----</td><td data-col="serie">----</td><td data-col="date">----</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:#666;font-size:13px;margin-top:8px;">
+      Nota: las filas están preparadas para actualizarse automáticamente desde tu base de datos (Firebase / API). Si falta alguna lotería específica dímela y la agrego.
+    </p>
   </main>
 
   <footer>
-    <p>&copy; 2025 Resultados de Hoy | Todos los derechos reservados</p>
+    <p>&copy; 2025 Resultados de Hoy</p>
   </footer>
+
+  <script>
+    // -------------------------
+    // UTILIDADES EN CLIENTE
+    // -------------------------
+    // Función para actualizar una fila por su data-key
+    function updateResult(key, result, serieOrObs = '', date = '') {
+      const row = document.querySelector('tr[data-key="' + key + '"]');
+      if (!row) return false;
+      const tdResult = row.querySelector('[data-col="result"]');
+      const tdSerie = row.querySelector('[data-col="serie"]');
+      const tdDate = row.querySelector('[data-col="date"]');
+      if (tdResult) tdResult.textContent = result ?? '----';
+      if (tdSerie) tdSerie.textContent = serieOrObs ?? '----';
+      if (tdDate) tdDate.textContent = date ?? '----';
+      return true;
+    }
+
+    // Búsqueda/filtrado simple
+    document.getElementById('search').addEventListener('input', function(e){
+      const q = (e.target.value || '').toLowerCase().trim();
+      const rows = document.querySelectorAll('tbody tr');
+      rows.forEach(r => {
+        const name = (r.querySelector('.name')?.textContent || '').toLowerCase();
+        r.style.display = name.includes(q) ? '' : 'none';
+      });
+    });
+
+    // EJEMPLO (comentado) de uso:
+    // updateResult('cundinamarca', '5734', 'Serie 112', '05/10/2025');
+
+    // -------------------------
+    // CONEXIÓN CON FIREBASE (placeholder)
+    // -------------------------
+    /* 
+      Si vas a usar Firebase Realtime Database o Firestore, aquí cargarías
+      el SDK y sus credenciales, luego escucharías los cambios y llamarías:
+        updateResult(key, result, serie, fecha)
+      Ejemplo (Firestore pseudo-código):
+        const doc = await firestore.collection('resultados').doc('cundinamarca').get();
+        updateResult('cundinamarca', doc.data().numero, doc.data().serie, doc.data().fecha);
+      IMPORTANT: No pegues claves públicas en páginas públicas. Usa reglas o un backend si es necesario.
+    */
+  </script>
 </body>
 </html>
-
+```
